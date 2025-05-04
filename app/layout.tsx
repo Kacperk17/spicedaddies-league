@@ -1,8 +1,37 @@
 import '@mantine/core/styles.css';
 
 import React from 'react';
-import { ColorSchemeScript, mantineHtmlProps, MantineProvider } from '@mantine/core';
-import { theme } from '../theme';
+import { ColorSchemeScript, mantineHtmlProps, MantineProvider, createTheme, MantineColorsTuple } from '@mantine/core';
+import { Global } from '@mantine/styles';
+import ThemeProvider from './ThemeProvider';
+
+
+const myColor: MantineColorsTuple = [
+  '#e6ffee',
+  '#d3f9e0',
+  '#a8f2c0',
+  '#7aea9f',
+  '#54e382',
+  '#3bdf70',
+  '#2bdd66',
+  '#1bc455',
+  '#0bae4a',
+  '#00973c'
+];
+
+const theme = createTheme({
+  colors: {
+    myColor,
+  },
+  components: {
+    Table: {
+      defaultProps: {
+        bg: myColor[7]
+      }
+    },
+  },
+
+});
 
 export const metadata = {
   title: 'Mantine Next.js template',
@@ -21,7 +50,7 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body>
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <ThemeProvider children={children} />
       </body>
     </html>
   );
