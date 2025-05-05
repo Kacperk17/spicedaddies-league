@@ -1,8 +1,12 @@
 
 
-import { Button, Container, Title } from '@mantine/core';
+import { Grid, Container, Title, Center, Space } from '@mantine/core';
 import LeagueStandings from '@/components/LeagueStandings';
 import { getSpicedaddiesLeagueStanding } from '@/utils/getStandings';
+import GwSelector from '@/components/GwSelector';
+import LeagueStandingsWithGwSelector from '@/components/LeagueStandingsWithGwSelector';
+import { HeaderSimple } from '@/components/Header';
+
 
 
 export default async function HomePage({
@@ -13,7 +17,7 @@ export default async function HomePage({
 
   let gw = 35
 
-  let rawGw = searchParams.gw
+  const rawGw = await searchParams.gw
 
   if (typeof rawGw === 'string') {
     const parsed = parseInt(rawGw, 10);
@@ -24,15 +28,13 @@ export default async function HomePage({
 
   const standings = await getSpicedaddiesLeagueStanding(gw)
 
+
+
   return (
     <>
       <Container size={'xs'} >
-        <Title order={1}>SpiceDaddies Live League Table</Title>
-        <Container size={'xs'}>
-          <LeagueStandings standings={standings} gw={gw}/>
-        </Container>
+        <LeagueStandingsWithGwSelector standings={standings} gw={gw} />
       </Container>
-      
     </>
   );
 }

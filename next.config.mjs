@@ -4,7 +4,8 @@ const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
-export default withBundleAnalyzer({
+/** @type {import('next').NextConfig} */
+const baseConfig = {
   reactStrictMode: false,
   eslint: {
     ignoreDuringBuilds: true,
@@ -12,4 +13,15 @@ export default withBundleAnalyzer({
   experimental: {
     optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
   },
-});
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/league-standings',
+        permanent: true,
+      },
+    ];
+  },
+};
+
+export default withBundleAnalyzer(baseConfig);

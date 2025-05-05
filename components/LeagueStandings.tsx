@@ -3,7 +3,7 @@ import { Table } from "@mantine/core";
 import { Text } from "@mantine/core";
 import { Standing } from "@/utils/getStandings";
 
-type LeagueStandingProps = {
+export type LeagueStandingProps = {
     standings: Standing[],
     gw: number
   };

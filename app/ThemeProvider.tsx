@@ -7,8 +7,10 @@ import {
   MantineColorsTuple,
 } from '@mantine/core';
 import { Global } from '@mantine/styles';
+import { HeaderSimple } from '@/components/Header';
+import { Space } from '@mantine/core';
 
-const myColor: MantineColorsTuple = [
+const mainColor: MantineColorsTuple = [
   '#e6ffee',
   '#d3f9e0',
   '#a8f2c0',
@@ -21,16 +23,35 @@ const myColor: MantineColorsTuple = [
   '#00973c',
 ];
 
+const secondaryColor: MantineColorsTuple = [
+    "#f5effa",
+    "#e5dcf0",
+    "#cab4e1",
+    "#ae8bd4",
+    "#9668c8",
+    "#8751c1",
+    "#8046bf",
+    "#6e38a8",
+    "#623197",
+    "#381b58"
+  ]
+
 const theme = createTheme({
   colors: {
-    myColor,
+    mainColor,
+    secondaryColor
   },
   components: {
     Table: {
       defaultProps: {
-        bg: myColor[7],
+        bg: mainColor[5],
       },
     },
+    Title: {
+        defaultProps: {
+            c: mainColor[9]
+        }
+    }
   },
 });
 
@@ -42,10 +63,12 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
           body: {
             margin: 0,
             padding: 0,
-            backgroundColor: myColor[1],
+            backgroundColor: mainColor[1],
           },
         }}
       />
+      <HeaderSimple />
+      <Space h={'xl'}/>
       {children}
     </MantineProvider>
   );

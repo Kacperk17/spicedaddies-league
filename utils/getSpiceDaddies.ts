@@ -2,9 +2,11 @@ export const CURRENT_GW = 35
 const SPICEDADDY_INFO_URL = 'https://fantasy.premierleague.com/api/entry/'
 const FPL_FIXTURE_URL = 'https://fantasy.premierleague.com/api/fixtures/'
 const BOOTSTRAP_URL = 'https://fantasy.premierleague.com/api/bootstrap-static/'
+const SPICEDADDY_HISTORIC_INFO = 'https://fantasy.premierleague.com/api/entry/979206/history/'
 
 
-const KACPER_ID = 810494
+export const KACPER_ID = 810494
+export const KACPER_HISTORIC_ID = 11479878
 const ZIGGY_ID = 979206
 const JOSH_ID = 7585390
 const AARON_ID = 1673693
@@ -12,7 +14,7 @@ const SHANE_ID = 2058723
 const DUG_ID = 18550
 const CATHAL_ID = 342589
 
-const spiceDaddyIds = [KACPER_ID, ZIGGY_ID, JOSH_ID, AARON_ID, SHANE_ID, DUG_ID, CATHAL_ID]
+export const spiceDaddyIds = [KACPER_ID, ZIGGY_ID, JOSH_ID, AARON_ID, SHANE_ID, DUG_ID, CATHAL_ID]
 
 function liveInfoUrl(spiceDaddyId: number, gw: number): string {
     return 'https://fantasy.premierleague.com/api/entry/' + spiceDaddyId + '/event/' + gw + '/picks/'
@@ -21,6 +23,11 @@ function liveInfoUrl(spiceDaddyId: number, gw: number): string {
 function liveGwInfoUrl(gw: number): string {
     return 'https://fantasy.premierleague.com/api/event/' + gw + '/live/'
 }
+
+function spiceDaddyInfoUrl(spiceDaddyId: number) {
+    return 'https://fantasy.premierleague.com/api/entry/' + spiceDaddyId
+}
+
 
 interface SpiceDaddy {
     id: number,
@@ -57,8 +64,29 @@ export async function getAllSpiceDaddies(gw: number): Promise<SpiceDaddy[]> {
         spiceDaddyList.push(spiceDaddy)
     })
 
+
     return await Promise.all(spiceDaddyList)
 
+}
+
+export async function getIdToSpicedaddyNameMap() {
+    const responses = await Promise.all(
+        spiceDaddyIds.map(id => fetch(spiceDaddyInfoUrl(id)))
+    )
+
+    const jsonData = await Promise.all(
+        responses.map(response => response.json())
+    )
+
+    const idToSpicedaddyNameMap = new Map<number, string>()
+
+    jsonData.forEach((daddy) => {
+        idToSpicedaddyNameMap.set(daddy.id, daddy.player_first_name + ' ' + daddy.player_last_name)
+    })
+
+    idToSpicedaddyNameMap.set(KACPER_HISTORIC_ID, "Kacper Kutkiewicz")
+
+    return idToSpicedaddyNameMap
 }
 
 async function getPlayerMap(): Promise<any> {
@@ -78,7 +106,7 @@ async function getPlayerMap(): Promise<any> {
 
 }
 
-async function getSpiceDaddy(spiceDaddyId: number, gw: number): Promise<SpiceDaddy> {
+export async function getSpiceDaddy(spiceDaddyId: number, gw: number): Promise<SpiceDaddy> {
 
     const responseGwInfo = await fetch(liveInfoUrl(spiceDaddyId, gw))
     const dataGwInfo = await responseGwInfo.json()
