@@ -51,6 +51,17 @@ const theme = createTheme({
         defaultProps: {
             c: mainColor[9]
         }
+    },
+    Paper: {
+      defaultProps: {
+        shadow: 'sm',
+        radius: 'md',
+      },
+      styles: () => ({
+        root: {
+          overflow: 'hidden',
+        },
+      }),
     }
   },
 });

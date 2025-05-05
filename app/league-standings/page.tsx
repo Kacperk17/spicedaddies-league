@@ -32,7 +32,7 @@ export default async function HomePage({
 
   return (
     <>
-      <Container size={'xs'} >
+      <Container size={'sm'} >
         <LeagueStandingsWithGwSelector standings={standings} gw={gw} />
       </Container>
     </>

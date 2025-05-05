@@ -34,7 +34,7 @@ export default function HistoricStandings({ standings }: HistoricStandingProps) 
                     <Table.Th>#</Table.Th>
                     <Table.Th>SpiceDaddy</Table.Th>
                     <Table.Th>Points</Table.Th>
-                    <Table.Th>Overall</Table.Th>
+                    <Table.Th>Overall Rank</Table.Th>
                 </Table.Tr>
             </Table.Thead>
             <Table.Tbody>{rows}</Table.Tbody>
