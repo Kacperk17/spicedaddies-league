@@ -1,5 +1,8 @@
 
-import { getHistoricSpicedaddyStanding } from "@/utils/getHistoricSpicedaddies"
+import { getHistoricSpicedaddyStanding, HistoricStanding } from "@/utils/getHistoricSpicedaddies"
+
+import HistoricStandings from "@/components/HistoricLeagueStandings";
+import { HistoricPerformance } from "@/utils/getHistoricSpicedaddies";
 
 import { Container } from "@mantine/core"
 import HistoricLeagueStandingsWithSeasonSelector from "@/components/LeagueStandingWithSeasonSelector"
@@ -21,16 +24,27 @@ export default async function Page({
     season = rawSeason
   }
 
+  let spicedaddies
 
-  const spicedaddies = await getHistoricSpicedaddyStanding(season)
+  const placeholderStanding: HistoricStanding = {
+    id: 1,
+    points: 1,
+    spiceDaddyName: "placeholder",
+    globalRank: 1
+  }
+
+  try {
+    spicedaddies = await getHistoricSpicedaddyStanding(season)
+  } catch {
+    spicedaddies = [placeholderStanding]
+  }
+
+  
+
 
   return (
     <>
-
       <Container size={'sm'}>
-        <Center>
-          <Title c={'black'}>Historic League Titles</Title>
-        </Center>
         <HistoricLeagueStandingsWithSeasonSelector standings={spicedaddies} />
       </Container>
     </>

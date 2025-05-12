@@ -29,7 +29,7 @@ function spiceDaddyInfoUrl(spiceDaddyId: number) {
 }
 
 
-interface SpiceDaddy {
+export interface SpiceDaddy {
     id: number,
     name: string,
     teamName: string,

@@ -9,6 +9,7 @@ import {
 import { Global } from '@mantine/styles';
 import { HeaderSimple } from '@/components/Header';
 import { Space } from '@mantine/core';
+import { AppShell } from '@mantine/core';
 
 const mainColor: MantineColorsTuple = [
   '#e6ffee',
@@ -24,17 +25,17 @@ const mainColor: MantineColorsTuple = [
 ];
 
 const secondaryColor: MantineColorsTuple = [
-    "#f5effa",
-    "#e5dcf0",
-    "#cab4e1",
-    "#ae8bd4",
-    "#9668c8",
-    "#8751c1",
-    "#8046bf",
-    "#6e38a8",
-    "#623197",
-    "#381b58"
-  ]
+  "#f5effa",
+  "#e5dcf0",
+  "#cab4e1",
+  "#ae8bd4",
+  "#9668c8",
+  "#8751c1",
+  "#8046bf",
+  "#6e38a8",
+  "#623197",
+  "#381b58"
+]
 
 const theme = createTheme({
   colors: {
@@ -48,9 +49,9 @@ const theme = createTheme({
       },
     },
     Title: {
-        defaultProps: {
-            c: mainColor[9]
-        }
+      defaultProps: {
+        c: mainColor[9]
+      }
     },
     Paper: {
       defaultProps: {
@@ -78,9 +79,18 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
           },
         }}
       />
-      <HeaderSimple />
-      <Space h={'xl'}/>
-      {children}
+
+      <AppShell
+        header={{ height: 70 }}
+        padding={'md'}
+      >
+        <AppShell.Header>
+          <HeaderSimple />
+        </AppShell.Header>
+        <AppShell.Main>
+          {children}
+        </AppShell.Main>
+      </AppShell>
     </MantineProvider>
   );
 }

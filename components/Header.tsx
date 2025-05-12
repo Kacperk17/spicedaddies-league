@@ -10,7 +10,8 @@ import premLogo from '../app/images/prem-logo.png';
 
 const links = [
   { link: '/league-standings', label: 'League Table' },
-  { link: '/past-tables', label: 'Past Tables' }
+  { link: '/past-tables', label: 'Past Tables' },
+  { link: "/spicedaddy-profiles", label: "Spicedaddy Profiles" }
 ];
 
 export function HeaderSimple() {
