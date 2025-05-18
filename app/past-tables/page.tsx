@@ -7,6 +7,9 @@ import SeasonSelector from "@/components/SeasonSelector";
 import HistoricStandings from "@/components/HistoricLeagueStandings";
 import { Paper } from "@mantine/core";
 
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+
 async function getHistoricStandings(season: string) {
 
   const firebaseString = season.replace("/", "_")
