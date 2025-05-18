@@ -12,7 +12,7 @@ import { Center } from "@mantine/core";
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { season: string | string[] | undefined };
+  searchParams: Promise<{ season: string | string[] | undefined }>;
 }) {
 
   let defaultSeason = "2023/24"

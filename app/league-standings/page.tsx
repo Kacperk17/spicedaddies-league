@@ -7,7 +7,7 @@ import { HeaderSimple } from '@/components/Header';
 import { Standing } from '@/utils/getStandings';
 
 export default async function HomePage({ searchParams }: { 
-  searchParams: { gw: string | string[] | undefined } 
+  searchParams: Promise<{ gw: string | string[] | undefined }> 
 }) {
   let defaultGw = 35;
   const { gw } = await searchParams
@@ -34,8 +34,9 @@ export default async function HomePage({ searchParams }: {
     transfer_hits: 0
   };
 
+
   try {
-    standings = await getSpicedaddiesLeagueStanding(gw);
+    standings = await getSpicedaddiesLeagueStanding(defaultGw);
   } catch {
     standings = [placeholderStanding];
   }
