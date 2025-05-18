@@ -1,8 +1,39 @@
 
-import { getHistoricSpicedaddyStanding, HistoricStanding } from "@/utils/getHistoricSpicedaddies"
+import { HistoricStanding } from "@/utils/getHistoricSpicedaddies"
+import initAdmin from "@/scripts/initAdmin";
 
 import { Container } from "@mantine/core"
 import HistoricLeagueStandingsWithSeasonSelector from "@/components/LeagueStandingWithSeasonSelector"
+
+async function getHistoricStandings(season: string) {
+
+  const firebaseString = season.replace("/", "_")
+
+  const app = await initAdmin();
+  const db = app.firestore();
+  const testSeason = db.collection('historicStandings').doc(firebaseString).collection('standings')
+
+  const standings: HistoricStanding[] = []
+
+  await testSeason.get().then(querySnapshot => {
+
+    querySnapshot.forEach(doc => {
+      const docId = parseInt(doc.id)
+
+      standings.push({
+        id: docId,
+        points: doc.data().points,
+        spiceDaddyName: doc.data().spiceDaddyName,
+        globalRank: doc.data().globalRank
+      })
+    });
+  })
+    .catch(error => {
+      console.error("Error getting documents: ", error);
+    })
+
+  return standings
+}
 
 export default async function Page({
   searchParams,
@@ -28,12 +59,10 @@ export default async function Page({
   }
 
   try {
-    spicedaddies = await getHistoricSpicedaddyStanding(defaultSeason)
+    spicedaddies = await getHistoricStandings(defaultSeason)
   } catch {
     spicedaddies = [placeholderStanding]
   }
-
-
 
 
   return (
