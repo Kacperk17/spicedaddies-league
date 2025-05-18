@@ -1,9 +1,20 @@
 import { spiceDaddyIds, getSpiceDaddy, KACPER_HISTORIC_ID, KACPER_ID } from "./getSpiceDaddies"
 import { getIdToSpicedaddyNameMap } from "./getSpiceDaddies"
 
-interface HistoricSpiceDaddy {
+export const seasonOptions = [
+    "2023/24",
+    "2022/23",
+    "2021/22",
+    "2020/21",
+    "2019/20",
+    "2018/19",
+    "2017/18"
+];
+
+export interface HistoricSpiceDaddy {
     id: number,
-    performances: HistoricPerformance[]
+    name: string,
+    performances: HistoricPerformance[],
 }
 
 export interface HistoricStanding {
@@ -11,6 +22,13 @@ export interface HistoricStanding {
     points: number,
     spiceDaddyName: string,
     globalRank: number
+}
+
+export interface HistoricSpiceDaddyStats {
+    id: number,
+    name: string,
+    wins: number,
+    top_three: number,
 }
 
 export interface HistoricPerformance {
@@ -21,6 +39,46 @@ export interface HistoricPerformance {
 
 function historicInfoUrl(spicedaddyId: number): string {
     return 'https://fantasy.premierleague.com/api/entry/' + spicedaddyId + '/history/'
+
+}
+
+export async function getSpiceDaddyStats(spicedaddyId: number): Promise<HistoricSpiceDaddyStats> {
+
+    const idToDaddyNameMap = await getIdToSpicedaddyNameMap()
+    let wins = 0
+    let top_three = 0
+
+    const daddyIdToUse = spicedaddyId === KACPER_ID ? KACPER_HISTORIC_ID : spicedaddyId
+
+
+    seasonOptions.forEach(async (season) => {
+        const historicSpicedaddies: HistoricStanding[] = await getHistoricSpicedaddyStanding(season)
+
+        const sortedStandings = [...historicSpicedaddies].sort((a, b) => b.points - a.points);
+        const index = sortedStandings.findIndex(entry => entry.id === daddyIdToUse);
+
+        console.log(seasonOptions)
+        const rank = index + 1
+
+        
+
+        if (rank <= 3) {
+            top_three++
+        }
+
+        if (rank == 1) {
+            wins++
+        }
+    })
+
+    return {
+        id: spicedaddyId,
+        name: idToDaddyNameMap.get(spicedaddyId) || "no name",
+        wins: wins,
+        top_three: top_three,
+    }
+
+
 
 }
 
@@ -50,11 +108,13 @@ export async function getHistoricSpicedaddyStanding(season: string): Promise<His
 
     return historicStandings
 }
-    
+
+
 
 export async function getHistoricSpicedaddy(spicedaddyId: number): Promise<HistoricSpiceDaddy> {
     const historicSpicedaddyResponse = await fetch(historicInfoUrl(spicedaddyId))
     const historicSpicedaddyData = await historicSpicedaddyResponse.json()
+    const idToDaddyNameMap = await getIdToSpicedaddyNameMap()
 
     const historicPerformances: HistoricPerformance[] = []
 
@@ -68,10 +128,10 @@ export async function getHistoricSpicedaddy(spicedaddyId: number): Promise<Histo
         historicPerformances.push(historicPerformance)
     })
 
-
     return {
         id: spicedaddyId,
-        performances: historicPerformances
+        name: idToDaddyNameMap.get(spicedaddyId) || "error name",
+        performances: historicPerformances,
     }
 }
 

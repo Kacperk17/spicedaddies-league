@@ -43,11 +43,6 @@ const theme = createTheme({
     secondaryColor
   },
   components: {
-    Table: {
-      defaultProps: {
-        bg: mainColor[5],
-      },
-    },
     Title: {
       defaultProps: {
         c: mainColor[9]
@@ -57,6 +52,7 @@ const theme = createTheme({
       defaultProps: {
         shadow: 'sm',
         radius: 'md',
+        bg: mainColor[5],
       },
       styles: () => ({
         root: {

@@ -1,17 +1,29 @@
 'use client'
 
-import { SpiceDaddy } from "@/utils/getSpiceDaddies"
-import { Container, Paper } from "@mantine/core"
-
+import { Paper } from "@mantine/core"
+import classes from './SpicedaddyProfile.module.css'
+import { Text } from "@mantine/core"
+import { Group } from "@mantine/core"
+import { HistoricSpiceDaddy, HistoricSpiceDaddyStats } from "@/utils/getHistoricSpicedaddies"
 
 interface ProfileProps {
-    spicedaddy: SpiceDaddy
+    spicedaddy: HistoricSpiceDaddyStats,
 }
 
 export default function SpicedaddyProfile({
-    spicedaddy
+    spicedaddy,
 }: ProfileProps) {
 
-    return (<Paper>hi</Paper>)
+    return (
+        <Paper
+            className={classes.profile}
+        >
+            <Text size='lg' fw={500}>{spicedaddy.name}</Text>
+            <Group>
+                <Text>Wins: {spicedaddy.wins}</Text>
+                <Text>Top 3: {spicedaddy.top_three}</Text>
+            </Group>
+        </Paper>
+    )
 
 }

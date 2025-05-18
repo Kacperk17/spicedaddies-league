@@ -15,7 +15,7 @@ export default function GwSelector({ currentGw }: { currentGw: number }) {
         }
     }, [value, router]);
 
-    const gwOptions = Array.from({ length: 35 }, (_, i) => ({
+    const gwOptions = Array.from({ length: 36 }, (_, i) => ({
         value: String(i + 1),
         label: `${i + 1}`,
     }));

@@ -1,7 +1,9 @@
 import SpicedaddyProfile from "@/components/SpicedaddyProfile"
-import { SpiceDaddy } from "@/utils/getSpiceDaddies"
+import { KACPER_ID, SpiceDaddy } from "@/utils/getSpiceDaddies"
+import { getAllHistoricSpicedaddies, HistoricSpiceDaddy } from "@/utils/getHistoricSpicedaddies"
+import { getSpiceDaddyStats } from "@/utils/getHistoricSpicedaddies"
 
-export default function Page() {
+export default async function Page() {
 
     const placeholderSpicedaddy: SpiceDaddy = {
         id: 1,
@@ -12,7 +14,12 @@ export default function Page() {
         transfer_hits: 0
     }
 
+    const historicSpiceDaddy = await getSpiceDaddyStats(KACPER_ID)
+
+    console.log(historicSpiceDaddy)
+
+
     return <SpicedaddyProfile
-        spicedaddy={placeholderSpicedaddy}
+        spicedaddy={historicSpiceDaddy}
     />
 }
