@@ -1,13 +1,8 @@
 
 import { getHistoricSpicedaddyStanding, HistoricStanding } from "@/utils/getHistoricSpicedaddies"
 
-import HistoricStandings from "@/components/HistoricLeagueStandings";
-import { HistoricPerformance } from "@/utils/getHistoricSpicedaddies";
-
 import { Container } from "@mantine/core"
 import HistoricLeagueStandingsWithSeasonSelector from "@/components/LeagueStandingWithSeasonSelector"
-import { Title } from "@mantine/core";
-import { Center } from "@mantine/core";
 
 export default async function Page({
   searchParams,

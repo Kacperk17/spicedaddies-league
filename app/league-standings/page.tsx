@@ -1,9 +1,6 @@
-import { Grid, Container, Title, Center, Space } from '@mantine/core';
-import LeagueStandings from '@/components/LeagueStandings';
+import { Container } from '@mantine/core';
 import { getSpicedaddiesLeagueStanding } from '@/utils/getStandings';
-import GwSelector from '@/components/GwSelector';
 import LeagueStandingsWithGwSelector from '@/components/LeagueStandingsWithGwSelector';
-import { HeaderSimple } from '@/components/Header';
 import { Standing } from '@/utils/getStandings';
 
 export default async function HomePage({ searchParams }: { 
@@ -11,8 +8,6 @@ export default async function HomePage({ searchParams }: {
 }) {
   let defaultGw = 35;
   const { gw } = await searchParams
-
-  console.log("rawGw: ", gw);
 
   if (typeof gw === 'string') {
     const parsed = parseInt(gw, 10);
