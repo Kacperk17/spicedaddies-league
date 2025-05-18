@@ -20,6 +20,7 @@
     "storybook:build": "storybook build"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
     "@mantine/core": "7.17.7",
     "@mantine/hooks": "7.17.7",
     "@mantine/styles": "^6.0.22",
@@ -61,5 +62,6 @@
     "ts-jest": "^29.2.6",
     "typescript": "5.8.2",
     "typescript-eslint": "^8.27.0"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
