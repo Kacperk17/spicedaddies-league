@@ -22,7 +22,7 @@ export function createFirebaseAdminApp(params: FirebaseAdminAppParams) {
   const cert = admin.credential.cert({
     projectId: params.projectId,
     clientEmail: params.clientEmail,
-    privateKey,
+    privateKey: privateKey,
   })
 
   return admin.initializeApp({

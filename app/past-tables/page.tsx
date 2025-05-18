@@ -60,11 +60,7 @@ export default async function Page({
     globalRank: 1
   }
 
-  try {
-    spicedaddies = await getHistoricStandings(defaultSeason)
-  } catch {
-    spicedaddies = [placeholderStanding]
-  }
+  spicedaddies = await getHistoricStandings(defaultSeason)
 
 
   return (
