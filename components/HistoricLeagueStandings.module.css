@@ -1,0 +1,9 @@
+.hideOnMobile {
+    display: table-cell;
+  }
+  
+  @media (max-width: 650px) {
+    .hideOnMobile {
+      display: none;
+    }
+  }

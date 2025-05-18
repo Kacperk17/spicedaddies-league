@@ -3,7 +3,9 @@ import { HistoricStanding } from "@/utils/getHistoricSpicedaddies"
 import initAdmin from "@/scripts/initAdmin";
 
 import { Container } from "@mantine/core"
-import HistoricLeagueStandingsWithSeasonSelector from "@/components/LeagueStandingWithSeasonSelector"
+import SeasonSelector from "@/components/SeasonSelector";
+import HistoricStandings from "@/components/HistoricLeagueStandings";
+import { Paper } from "@mantine/core";
 
 async function getHistoricStandings(season: string) {
 
@@ -68,7 +70,10 @@ export default async function Page({
   return (
     <>
       <Container size={'sm'}>
-        <HistoricLeagueStandingsWithSeasonSelector standings={spicedaddies} />
+        <Paper>
+          <HistoricStandings standings={spicedaddies} />
+        </Paper>
+        <SeasonSelector />
       </Container>
     </>
   )

@@ -1,7 +1,9 @@
 
 'use client'
 import { Table, Text } from "@mantine/core"
-import { HistoricPerformance, HistoricStanding } from "@/utils/getHistoricSpicedaddies"
+import { HistoricStanding } from "@/utils/getHistoricSpicedaddies"
+import styles from './HistoricLeagueStandings.module.css'
+
 
 interface HistoricStandingProps {
     standings: HistoricStanding[]
@@ -21,7 +23,7 @@ export default function HistoricStandings({ standings }: HistoricStandingProps) 
             <Table.Td>
                 <Text>{standing.points}</Text>
             </Table.Td>
-            <Table.Td>
+            <Table.Td className={styles.hideOnMobile}>
                 <Text>{standing.globalRank}</Text>
             </Table.Td>
         </Table.Tr>
@@ -34,7 +36,7 @@ export default function HistoricStandings({ standings }: HistoricStandingProps) 
                     <Table.Th>#</Table.Th>
                     <Table.Th>SpiceDaddy</Table.Th>
                     <Table.Th>Points</Table.Th>
-                    <Table.Th>Overall Rank</Table.Th>
+                    <Table.Th className={styles.hideOnMobile}>Overall Rank</Table.Th>
                 </Table.Tr>
             </Table.Thead>
             <Table.Tbody>{rows}</Table.Tbody>
