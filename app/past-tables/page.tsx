@@ -12,17 +12,16 @@ import { Center } from "@mantine/core";
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: { season: string | string[] | undefined };
 }) {
 
-  let season = "2023/24"
+  let defaultSeason = "2023/24"
+  const { season } = await searchParams
 
-
-  const rawSeason = searchParams.season
-
-  if (typeof rawSeason === 'string') {
-    season = rawSeason
+  if (typeof season === 'string') {
+    defaultSeason = season
   }
+
 
   let spicedaddies
 
@@ -34,12 +33,12 @@ export default async function Page({
   }
 
   try {
-    spicedaddies = await getHistoricSpicedaddyStanding(season)
+    spicedaddies = await getHistoricSpicedaddyStanding(defaultSeason)
   } catch {
     spicedaddies = [placeholderStanding]
   }
 
-  
+
 
 
   return (
