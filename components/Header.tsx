@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { Burger, Container, Group, Text, Title, Image } from '@mantine/core';
+import { Burger, Container, Group, Text, Title, Image, Drawer, Stack } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import classes from './HeaderSimple.module.css';
 import NextImage from 'next/image';
@@ -15,7 +15,7 @@ const links = [
 ];
 
 export function HeaderSimple() {
-  const [opened, { toggle }] = useDisclosure(false);
+  const [opened, { toggle, close }] = useDisclosure(false);
   const pathname = usePathname();
 
   const items = links.map((link) => (
@@ -24,6 +24,7 @@ export function HeaderSimple() {
       href={link.link}
       className={classes.link}
       data-active={pathname === link.link || undefined}
+      onClick={close} // Close the drawer when a link is clicked
     >
       {link.label}
     </Link>
@@ -47,6 +48,27 @@ export function HeaderSimple() {
           {items}
         </Group>
         <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
+
+        <Drawer
+          opened={opened}
+          onClose={close}
+          hiddenFrom="xs"
+          zIndex={1000000}
+        >
+          <Stack mt={60} gap="md" p="md">
+            {links.map((link) => (
+              <Link
+                key={link.label}
+                href={link.link}
+                className={classes.link}
+                data-active={pathname === link.link || undefined}
+                onClick={close}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </Stack>
+        </Drawer>
       </Container>
     </header>
   );

@@ -59,6 +59,25 @@ const theme = createTheme({
           overflow: 'hidden',
         },
       }),
+    },
+
+    Drawer: {
+      defaultProps: {
+        withCloseButton: true, 
+        size: '50%',
+        position: 'right',
+      },
+      styles: (theme: any) => ({
+        header: {
+          backgroundColor: theme.colors.mainColor[5]
+        },
+        content: {
+          backgroundColor: theme.colors.mainColor[5], 
+        },
+        body: {
+          padding: theme.spacing.md,
+        }
+      }),
     }
   },
 });
