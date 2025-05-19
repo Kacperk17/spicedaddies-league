@@ -44,10 +44,10 @@ export function HeaderSimple() {
           />
           <Title order={3} c="#381b58">SpiceDaddies</Title>
         </Group>
-        <Group gap={5} visibleFrom="xs">
+        <Group gap={5} visibleFrom="sm">
           {items}
         </Group>
-        <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
+        <Burger opened={opened} onClick={toggle} hiddenFrom='sm' size="sm" />
 
         <Drawer
           opened={opened}

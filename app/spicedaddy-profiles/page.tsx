@@ -1,25 +1,49 @@
 import SpicedaddyProfile from "@/components/SpicedaddyProfile"
-import { KACPER_ID, SpiceDaddy } from "@/utils/getSpiceDaddies"
-import { getAllHistoricSpicedaddies, HistoricSpiceDaddy } from "@/utils/getHistoricSpicedaddies"
-import { getSpiceDaddyStats } from "@/utils/getHistoricSpicedaddies"
+import { Group, SimpleGrid } from "@mantine/core";
+import { Flex } from "@mantine/core";
+import { HistoricSpiceDaddyStats } from "@/utils/getHistoricSpicedaddies"
+import initAdmin from "@/scripts/initAdmin"
+
+async function getSpicedaddyStats() {
+
+    const app = await initAdmin();
+    const db = app.firestore();
+    const spicedaddyStats = await db.collection('historicStats').get()
+
+    const historicSpiceDaddies: any[] = []
+
+    spicedaddyStats.docs.map(doc => historicSpiceDaddies.push(doc.data()))
+
+    return historicSpiceDaddies
+}
 
 export default async function Page() {
 
-    const placeholderSpicedaddy: SpiceDaddy = {
+    const placeholderSpicedaddy: HistoricSpiceDaddyStats = {
         id: 1,
         name: "placeholder spicedaddy",
-        teamName: "Placeholder team",
-        total_points: 5,
-        current_gw_points: 7,
-        transfer_hits: 0
+        wins: 1,
+        top_three: 1,
+        last_place: 1,
+        champion_seasons: ["hi"],
+        losing_seasons: ["hi"]
     }
 
-    const historicSpiceDaddy = await getSpiceDaddyStats(KACPER_ID)
-
-    console.log(historicSpiceDaddy)
+    const spicedaddyStats = await getSpicedaddyStats()
 
 
-    return <SpicedaddyProfile
-        spicedaddy={historicSpiceDaddy}
-    />
+    return (
+        <Flex justify="center">
+            <SimpleGrid
+                cols={{ base: 1, sm: 2, md: 4 }}
+            >
+                {spicedaddyStats.map((spicedaddy) => (
+                    <SpicedaddyProfile
+                        key={spicedaddy.id}
+                        spicedaddy={spicedaddy}
+                    />
+                ))}
+            </SimpleGrid>
+        </Flex>
+    );
 }

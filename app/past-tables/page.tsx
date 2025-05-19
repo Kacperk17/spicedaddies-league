@@ -2,13 +2,10 @@
 import { HistoricStanding } from "@/utils/getHistoricSpicedaddies"
 import initAdmin from "@/scripts/initAdmin";
 
-import { Container } from "@mantine/core"
+import { Container, Space } from "@mantine/core"
 import SeasonSelector from "@/components/SeasonSelector";
 import HistoricStandings from "@/components/HistoricLeagueStandings";
 import { Paper } from "@mantine/core";
-
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
 
 async function getHistoricStandings(season: string) {
 
@@ -63,16 +60,23 @@ export default async function Page({
     globalRank: 1
   }
 
-  spicedaddies = await getHistoricStandings(defaultSeason)
+  try {
+    spicedaddies = await getHistoricStandings(defaultSeason)
+  }
+  catch (error) {
+    spicedaddies = [placeholderStanding]
+    throw new Error("Could not fetch data from server")
+  }
 
 
   return (
     <>
       <Container size={'sm'}>
+        <SeasonSelector />
+        <Space h={'md'} />
         <Paper>
           <HistoricStandings standings={spicedaddies} />
         </Paper>
-        <SeasonSelector />
       </Container>
     </>
   )

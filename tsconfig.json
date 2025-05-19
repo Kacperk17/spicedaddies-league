@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+
     "types": [
       "node",
       "jest",
@@ -29,14 +30,15 @@
       ],
       "@scripts/*": [
         "./scripts/*"
-      ]
+      ],
+      "@utils/*": ["./utils/*"]
     },
     "plugins": [
       {
         "name": "next"
       }
     ],
-    "module": "esnext"
+    "module": "commonjs",
   },
   "include": [
     "next-env.d.ts",

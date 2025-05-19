@@ -7,12 +7,12 @@ const SPICEDADDY_HISTORIC_INFO = 'https://fantasy.premierleague.com/api/entry/97
 
 export const KACPER_ID = 810494
 export const KACPER_HISTORIC_ID = 11479878
-const ZIGGY_ID = 979206
-const JOSH_ID = 7585390
-const AARON_ID = 1673693
-const SHANE_ID = 2058723
-const DUG_ID = 18550
-const CATHAL_ID = 342589
+export const ZIGGY_ID = 979206
+export const JOSH_ID = 7585390
+export const AARON_ID = 1673693
+export const SHANE_ID = 2058723
+export const DUG_ID = 18550
+export const CATHAL_ID = 342589
 
 export const spiceDaddyIds = [KACPER_ID, ZIGGY_ID, JOSH_ID, AARON_ID, SHANE_ID, DUG_ID, CATHAL_ID]
 

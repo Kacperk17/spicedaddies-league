@@ -6,7 +6,6 @@ import { firestore } from "firebase-admin";
 
 async function uploadHistoricStandings(db: firestore.Firestore) {
     const seasonOptionsList = seasonOptions
-    console.log("list ", seasonOptionsList)
 
 
     for (const season of seasonOptionsList) {
@@ -29,10 +28,10 @@ async function uploadHistoricStandings(db: firestore.Firestore) {
         }
 
         await batch.commit();
-        console.log(`✅ Uploaded standings for ${season}`);
+        console.log(`Uploaded standings for ${season}`);
     }
 
-    console.log("🎉 All seasons uploaded successfully.");
+    console.log("All seasons uploaded successfully.");
 }
 
 async function main() {
@@ -41,7 +40,7 @@ async function main() {
         const db = app.firestore();
         await uploadHistoricStandings(db);
     } catch (err) {
-        console.error("❌ Failed to upload:", err);
+        console.error("Failed to upload:", err);
     }
 }
 
