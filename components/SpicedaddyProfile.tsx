@@ -4,7 +4,7 @@ import { Flex, Paper } from "@mantine/core"
 import classes from './SpicedaddyProfile.module.css'
 import { Text } from "@mantine/core"
 import { Group } from "@mantine/core"
-import { HistoricSpiceDaddy, HistoricSpiceDaddyStats } from "@/utils/getHistoricSpicedaddies"
+import { HistoricSpiceDaddyStats } from "@/utils/getHistoricSpicedaddies"
 import { Image } from "@mantine/core"
 import NextImage from "next/image"
 import { KACPER_ID, ZIGGY_ID, SHANE_ID, DUG_ID, CATHAL_ID, JOSH_ID, AARON_ID } from "@/utils/getSpiceDaddies"
