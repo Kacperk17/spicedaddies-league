@@ -9,7 +9,7 @@ import { Image } from "@mantine/core"
 import NextImage from "next/image"
 import { KACPER_ID, ZIGGY_ID, SHANE_ID, DUG_ID, CATHAL_ID, JOSH_ID, AARON_ID } from "@/utils/getSpiceDaddies"
 import kacperProfile from '../app/images/spicedaddy_profiles/kacper.jpg';
-import aaronProfile from '../app/images/spicedaddy_profiles/aaron.png';
+import aaronProfile from '../app/images/spicedaddy_profiles/aaron.jpg';
 import cathalProfile from '../app/images/spicedaddy_profiles/cathal.jpg';
 import dugProfile from '../app/images/spicedaddy_profiles/dug.jpg';
 import joshProfile from '../app/images/spicedaddy_profiles/josh.jpg';
