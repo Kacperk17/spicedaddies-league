@@ -13,7 +13,8 @@ export const placeholderSpicedaddy: HistoricSpiceDaddyStats = {
     champion_seasons: ["hi"],
     losing_seasons: ["hi"],
     alias: "hi",
-    seasonToRankMap: new Map()
+    seasonToRankMap: new Map(),
+    bio: ""
 }
 
 async function getSpicedaddyStats() {
