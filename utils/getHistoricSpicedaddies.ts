@@ -31,7 +31,10 @@ export interface HistoricSpiceDaddyStats {
     top_three: number,
     last_place: number,
     champion_seasons: string[],
-    losing_seasons: string[]
+    losing_seasons: string[],
+    alias: string,
+    seasonToRankMap: Map<string, number>,
+    bio: string
 }
 
 export interface HistoricPerformance {
@@ -53,16 +56,21 @@ export async function getSpiceDaddyStats(spicedaddyId: number): Promise<Historic
     let last_place: number = 0
     const winning_seasons: string[] = []
     const losing_seasons: string[] = []
+    const seasonToRankMap: Map<string, number> = new Map()
 
     const daddyIdToUse = spicedaddyId === KACPER_ID ? KACPER_HISTORIC_ID : spicedaddyId
 
     for (const season of seasonOptions) {
+
+
+        console.log("Getting Historing Spicedaddy Standing")
         const historicSpicedaddies: HistoricStanding[] = await getHistoricSpicedaddyStanding(season)
 
         const sortedStandings = [...historicSpicedaddies].sort((a, b) => b.points - a.points);
         const index = sortedStandings.findIndex(entry => entry.id === daddyIdToUse);
 
         const rank = index + 1
+        seasonToRankMap.set(season, rank)
 
         if (rank <= 3) {
             top_three++
@@ -86,7 +94,10 @@ export async function getSpiceDaddyStats(spicedaddyId: number): Promise<Historic
         top_three: top_three,
         last_place: last_place,
         champion_seasons: winning_seasons,
-        losing_seasons: losing_seasons
+        losing_seasons: losing_seasons,
+        alias: "",
+        seasonToRankMap: seasonToRankMap,
+        bio: ""
     }
 }
 
@@ -94,6 +105,8 @@ export async function getSpiceDaddyStats(spicedaddyId: number): Promise<Historic
 
 
 export async function getHistoricSpicedaddyStanding(season: string): Promise<HistoricStanding[]> {
+
+    console.log("Getting All Historic Spicedaddies")
     const historicSpicedaddies: HistoricSpiceDaddy[] = await getAllHistoricSpicedaddies()
     const idToDaddyNameMap = await getIdToSpicedaddyNameMap()
 
@@ -145,15 +158,18 @@ export async function getHistoricSpicedaddy(spicedaddyId: number): Promise<Histo
 }
 
 export async function getAllHistoricSpicedaddies(): Promise<HistoricSpiceDaddy[]> {
-    const promises: Promise<HistoricSpiceDaddy>[] = []
-
-    spiceDaddyIds.forEach((spicedaddyId) => {
-        const promise = getHistoricSpicedaddy(
-            spicedaddyId === KACPER_ID ? KACPER_HISTORIC_ID : spicedaddyId
-        )
-        promises.push(promise)
-    })
-
-    const historicSpicedaddyList = await Promise.all(promises)
-    return historicSpicedaddyList
-}
+    const historicSpicedaddyList: HistoricSpiceDaddy[] = [];
+    
+    for (const spicedaddyId of spiceDaddyIds) {
+      const adjustedId = spicedaddyId === KACPER_ID ? KACPER_HISTORIC_ID : spicedaddyId;
+      
+      // Process one at a time with delay
+      const data = await getHistoricSpicedaddy(adjustedId);
+      historicSpicedaddyList.push(data);
+      
+      // Add delay (e.g., 500ms between requests)
+      await new Promise(resolve => setTimeout(resolve, 50)); 
+    }
+    
+    return historicSpicedaddyList;
+  }

@@ -4,6 +4,18 @@ import { Flex } from "@mantine/core";
 import { HistoricSpiceDaddyStats } from "@/utils/getHistoricSpicedaddies"
 import initAdmin from "@/scripts/initAdmin"
 
+export const placeholderSpicedaddy: HistoricSpiceDaddyStats = {
+    id: 1,
+    name: "placeholder spicedaddy",
+    wins: 1,
+    top_three: 1,
+    last_place: 1,
+    champion_seasons: ["hi"],
+    losing_seasons: ["hi"],
+    alias: "hi",
+    seasonToRankMap: new Map()
+}
+
 async function getSpicedaddyStats() {
 
     const app = await initAdmin();
@@ -19,15 +31,7 @@ async function getSpicedaddyStats() {
 
 export default async function Page() {
 
-    const placeholderSpicedaddy: HistoricSpiceDaddyStats = {
-        id: 1,
-        name: "placeholder spicedaddy",
-        wins: 1,
-        top_three: 1,
-        last_place: 1,
-        champion_seasons: ["hi"],
-        losing_seasons: ["hi"]
-    }
+    
 
     const spicedaddyStats = await getSpicedaddyStats()
 

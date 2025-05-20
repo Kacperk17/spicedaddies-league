@@ -45,7 +45,12 @@ const theme = createTheme({
   components: {
     Title: {
       defaultProps: {
-        c: mainColor[9]
+        c: secondaryColor[9]
+      }
+    },
+    Text: {
+      defaultProps: {
+        c: secondaryColor[9]
       }
     },
     Paper: {
