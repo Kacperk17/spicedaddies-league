@@ -1,21 +1,9 @@
-import SpicedaddyProfile from "@/components/SpicedaddyProfile"
+import SpicedaddyProfile from "@/components/profile/SpicedaddyProfile"
 import { Group, SimpleGrid } from "@mantine/core";
 import { Flex } from "@mantine/core";
 import { HistoricSpiceDaddyStats } from "@/utils/getHistoricSpicedaddies"
 import initAdmin from "@/scripts/initAdmin"
 
-export const placeholderSpicedaddy: HistoricSpiceDaddyStats = {
-    id: 1,
-    name: "placeholder spicedaddy",
-    wins: 1,
-    top_three: 1,
-    last_place: 1,
-    champion_seasons: ["hi"],
-    losing_seasons: ["hi"],
-    alias: "hi",
-    seasonToRankMap: new Map(),
-    bio: ""
-}
 
 async function getSpicedaddyStats() {
 

@@ -3,8 +3,8 @@ import { HistoricStanding } from "@/utils/getHistoricSpicedaddies"
 import initAdmin from "@/scripts/initAdmin";
 
 import { Container, Space } from "@mantine/core"
-import SeasonSelector from "@/components/SeasonSelector";
-import HistoricStandings from "@/components/HistoricLeagueStandings";
+import SeasonSelector from "@/components/past-table/SeasonSelector";
+import HistoricStandings from "@/components/past-table/HistoricLeagueStandings";
 import { Paper } from "@mantine/core";
 
 async function getHistoricStandings(season: string) {
