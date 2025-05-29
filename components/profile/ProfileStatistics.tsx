@@ -7,6 +7,16 @@ type ProfielStatisticsProps = {
     spicedaddy: HistoricSpiceDaddyStats
 }
 
+export const rankToDisplayMap = new Map([
+    [1, '1st 🏆'],
+    [2, '2nd 🥈'],
+    [3, '3rd 🥉'],
+    [4, '4th'],
+    [5, '5th'],
+    [6, '6th'],
+    [7, '7th 💩']
+])
+
 function getAverageRank(spicedaddy: HistoricSpiceDaddyStats): string {
     const ranks = Object.values(spicedaddy.seasonToRankMap);
 
@@ -18,16 +28,6 @@ function getAverageRank(spicedaddy: HistoricSpiceDaddyStats): string {
 }
 
 export default function ProfielStatistics({ spicedaddy }: ProfielStatisticsProps) {
-
-    const rankToDisplayMap = new Map([
-        [1, '1st 🏆'],
-        [2, '2nd 🥈'],
-        [3, '3rd 🥉'],
-        [4, '4th'],
-        [5, '5th'],
-        [6, '6th'],
-        [7, '7th 💩']
-    ])
 
     return (
         <Paper>

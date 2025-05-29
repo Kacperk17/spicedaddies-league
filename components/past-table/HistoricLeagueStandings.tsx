@@ -5,6 +5,7 @@ import { HistoricStanding } from "@/utils/getHistoricSpicedaddies"
 import styles from './HistoricLeagueStandings.module.css'
 import { useRouter } from "next/navigation"
 import { KACPER_HISTORIC_ID, KACPER_ID } from "@/utils/getSpiceDaddies"
+import { rankToDisplayMap } from "../profile/ProfileStatistics"
 
 
 interface HistoricStandingProps {
@@ -18,7 +19,7 @@ export default function HistoricStandings({ standings }: HistoricStandingProps) 
     const rows = sortedStandings.map((standing, index) => (
         <Table.Tr key={standing.id}>
             <Table.Td>
-                <Text>{index + 1}</Text>
+                <Text>{rankToDisplayMap.get(index + 1)}</Text>
             </Table.Td>
             <Table.Td>
                 <Text fw={700}
